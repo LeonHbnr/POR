@@ -1,0 +1,31 @@
+\begin{table}[H]
+    \centering
+    \small
+    \begin{tabular}{c|l|c|c|c}
+        {\rotatebox{90}{\parbox{1.8cm}{\textbf{Spannung}}}} &
+        \textbf{\makecell{Werte}} &
+        \textbf{\makecell{Spezifikation}} &
+        \textbf{\makecell{Min. Wert}} &
+        \textbf{\makecell{Max. Wert}} \\
+        \midrule
+        
+        \multirow{5}{*}{\rotatebox{90}{5 V}} &
+        Verzögerung steigende Flanke & 20 us $\leq$ x $\leq$ 130 us & 40.14 us & 109.5 us \\
+        & Verzögerung fallende Flanke & x $\leq$ 1 us & 64.04 ns & 72.13 ns \\
+        & Schwellspannung steigend & 2.2 V $\leq$ x $\leq$ 2.6 V & 2.354 V & 2.461 V \\
+        & Schwellspannung fallend & 2.1 V $\leq$ x $\leq$ 2.5 V & 2.289 V & 2.396 V \\
+        & Hysterese & 50 mV $\leq$ x $\leq$ 120 mV & 62.34 mV & 66.29 mV \\
+        \midrule
+
+        \multirow{5}{*}{\rotatebox{90}{1.5 V}} &
+        Verzögerung steigende Flanke & 20 us $\leq$ x $\leq$ 230 us & 33.84 us & 77.87 us \\
+        & Verzögerung fallende Flanke & x $\leq$ 1 us & 84.91 ns & 108 ns \\
+        & Schwellspannung steigend & 1.1 V $\leq$ x $\leq$ 1.45 V & 1.22 V & 1.344 V \\
+        & Schwellspannung fallend & 1.05 V $\leq$ x $\leq$ 1.4 V & 1.146 V & 1.264 V \\
+        & Hysterese & 50 mV $\leq$ x $\leq$ 120 mV & 73.58 mV & 79.58 mV \\
+        \midrule
+        
+    \end{tabular}
+    \caption{MC-Mismatch-Simulation mit Anstiegs-und Abfallzeit von 10~ms}
+    \label{tab:MCMismatch10}
+\end{table}

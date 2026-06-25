@@ -1,0 +1,29 @@
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        % Bild um 90° drehen und auf Seitenhöhe skalieren
+        \node[anchor=south west, inner sep=0] (image) at (0,0) 
+            {\includegraphics[keepaspectratio, scale=0.7, angle=-90]{figures/CD/Picture1.png}};
+
+        % Berechnung der Mittelpunkte für die Beschriftung
+        \pgfmathsetmacro{\ymidA}{(0 + 7)/2}
+        \pgfmathsetmacro{\ymidB}{(7 + 13.5)/2}    % Mittelpunkt für "Schaltpunkte Komparator"
+        \pgfmathsetmacro{\ymidC}{(13.5 + 18.5)/2} % Mittelpunkt für "Inverterkette"
+        \pgfmathsetmacro{\ymidD}{(18.5 + 23)/2}   % Mittelpunkt für "Generierung Referenzstrom"
+
+        \begin{scope}
+            % Gestrichelte Linien
+            \draw[dashed] (0,7) -- ++(10,0);
+            \draw[dashed] (0,13.5) -- ++(10,0);
+            \draw[dashed] (0,18.5) -- ++(10,0);
+
+            % Mittelpunkte setzen (berechnete Werte werden nun genutzt)
+            \node at (8, \ymidA) {\textbf{Verzögerungs- und Reset-Element}};
+            \node at (8, \ymidB) {\textbf{Inverterkette}};
+            \node at (8, \ymidC) {\textbf{Schaltpunkte Komparator}};
+            \node at (8, \ymidD) {\textbf{Generierung Referenzstrom}};
+        \end{scope}
+    \end{tikzpicture}
+    \caption{Schaltbild der kompletten PoR-Schaltung}
+    \label{fig:PoR_complete}
+\end{figure}

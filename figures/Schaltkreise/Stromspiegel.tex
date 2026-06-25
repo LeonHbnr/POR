@@ -1,0 +1,43 @@
+%\vspace{1.5\baselineskip}
+\begin{figure}[H]
+    \begin{center}
+        \begin{circuitikz}[european]
+            \ctikzset{tripoles/mos style/arrows}[line width=thick, european]
+            
+            % Transistoren 
+            \draw (-2,0) node[nmos, yscale=-1, rotate=180](nmosL){}
+                node at (nmosL.center) [anchor=center, xshift=-10pt]{$N_0$};
+            \draw (2,0) node[nmos](nmosR){$N_1$};
+
+            \draw (nmosL.gate) -- (nmosR.gate)
+                coordinate[pos=0.5](gate_cross)
+                (gate_cross) node[circle, fill, inner sep=1.5pt]{};
+
+            \draw (nmosL.drain) -- ++(0,0.25) 
+                coordinate(left_cross)
+                node[circle, fill, inner sep=1.5pt]{};
+
+            \draw (left_cross) -| (gate_cross);
+
+            \draw (left_cross) -- ++(0,1.25);
+            \draw (nmosR.drain) -- ++(0,1.5);
+
+            % Ground 
+            \draw (nmosL.source) -- ++ (0,-0.5) -- ++ (2,0)
+                node[circle, fill, inner sep=1.5pt]{};
+            \draw (nmosR.source) -- ++ (0,-0.5) -- ++ (-2,0)
+                coordinate(ground);
+            \draw (ground) -- ++(0,-.25) node[sground]{}
+                node[right, xshift=5pt, yshift=-7pt]{Gnd};
+
+            % Ströme
+            \draw[->, thick, >=stealth] (-2.25,2) -- ++(0,-.75)
+                node[left, yshift=10pt]{$I_{in}$};
+            \draw[->, thick, >=stealth] (2.25,2) -- ++(0,-.75)
+                node[right, yshift=10pt]{$I_{out}$};
+
+        \end{circuitikz}
+    \end{center}
+    \caption[Aufbau Stromspiegel]{\\Quelle: Eigene Darstellung Aufbau Stromspiegel in Anlehnung an \cite[S. 512]{MicroelectronicCircuits}}
+    \label{fig:current_mirror}
+\end{figure}

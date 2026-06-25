@@ -1,0 +1,85 @@
+%\vspace{1.5\baselineskip}
+\begin{figure}[H]
+    \begin{center}
+        \begin{circuitikz}[european]
+            \ctikzset{tripoles/mos style/arrows}[line width=thick, european]
+            % Widerstand
+            \draw (-4,4) coordinate(resistor-begin) to[resistor, l={$R_0$}] (-4,1) coordinate(resistor-end);
+                %(-5.5,3) -- (-4.5,3) node[above, midway]{$Vdd$};
+            
+            % NMOS Transistor
+            \draw (-4,-0.5) node[nmos, anchor=drain] (nmosL) {$N_0$};
+
+            % NMOS Transistoren R 
+            \draw (-1.5,3.25) node[nmosd, anchor=drain] (nmosL1) {$N_1$}
+                %(nmosL1.gate) -- ++(-0.5,0) |- (resistor-end);
+                (resistor-end) -- ++(1,0) |- (nmosL1.gate);
+            \draw (-1.5,-1) node[nmos, anchor=drain] (nmosL2) {$N_2$}
+                (nmosL1.source) -- (nmosL2.drain) coordinate [pos=0.5](nmosMP) % Verbindung & Mittelpunkt zwischen nmos
+                (nmosMP) node[circle, fill, inner sep=1.5pt]{}
+                (nmosL2.gate) -- ++(-0.25,0) |- (nmosMP)
+                node[above, xshift=-20pt]{$V_{ref}$};
+                
+            
+            % Verbindung von Drain des NMOS mit Widerstand
+            \draw (resistor-end) -- (nmosL.drain);
+            \draw (nmosL.gate) -- ++(-0.25,0) |- (resistor-end)
+                node[circle, fill, inner sep=1.5pt]{}
+                node[above, midway]{$V_{gate}$};
+            %
+            %*************************************************************************
+            %
+            % Widerstand R
+            \draw (0,4.5) coordinate (resistor-begin1) to[resistor, l={$R_1$}] (0,2) coordinate (resistor-end1);
+            \draw (0,2) coordinate (resistor-begin2) to[resistor, l={$R_2$}] (0,-1) coordinate (resistor-end2);
+            \draw (0,-1) coordinate (resistor-begin3) to[resistor, l={$R_3$}] (0,-3.5) coordinate (resistor-end3);
+
+            % NMOSR 
+            \draw (3,2) node[nmos, rotate=270] (nmosR1) {}
+                node at (nmosR1.center) [anchor=center, yshift=-10pt] {$N_3$}
+                (nmosR1.source) -- (resistor-end1) % Verbinung zu Wiederständen 
+                node[circle, fill, inner sep=1.5pt]{}; % Punkt am Ende der Verbindung 
+            \draw (3,-1) node[nmos, rotate=270] (nmosR2) {}
+                node at (nmosR2.center) [anchor=center, yshift=-10pt] {$N_4$}
+                (nmosR2.source) -- (resistor-end2)
+                node[circle, fill, inner sep=1.5pt]{};
+
+            % NMOS Drain Verbindung
+            \draw (nmosR1.drain) -- ++ (0.25,0) % horizontal nach rechts
+                -- ++ (0,-3) coordinate (comp) % vertikale Linie 
+                node[circle, fill, inner sep=1.5pt]{};
+
+            \draw (nmosR1.gate) -- ++(0,0.25) -- ++(-0.75,0) 
+                node[above, midway]{$V_{res}$};
+            \draw (nmosR2.gate) -- ++(0,0.25) -- ++(-0.75,0)
+                node[above, midway]{$V_{res0}$};
+
+            % Dreieck am Ende von Vcomp
+            \draw (6.75,-0.51) node[op amp] (triangle){}
+                (triangle.+) -- (nmosR2.drain);
+            \draw (triangle) node[above, yshift=27pt] {Komparator};  
+
+            \draw (triangle.-) -- ++(-0.5,0) node[above]{$V_{ref}$};
+
+            % Verbindung Ground
+            \draw (nmosL.source) |- (resistor-end3)
+                (nmosL2.source) |- (resistor-end3) coordinate[pos=0.5](gndM)
+                (gndM) -- ++(0,-0.25) node[sground]{}
+                    node[right, xshift=5pt, yshift=-5pt]{Gnd}
+                (gndM) node[circle, fill, inner sep=1.5pt]{}; 
+
+            % Verbindung VDD
+            \draw (resistor-begin) |- (resistor-begin1)
+                (nmosL1.drain) |- (resistor-begin1) coordinate[pos=0.5](vddM)
+                (vddM) node[circle, fill, inner sep=1.5pt]{}
+                (vddM) -- ++(0,0.5) coordinate(vddA)
+                (vddA) -- ++(-0.5,0)
+                (vddA) -- ++(0.5,0)
+                (vddA) node[above] {$V_{DD}$};
+
+        \end{circuitikz}
+    \end{center}
+    \caption[Generierung des Referenzstrom durch Transistor]{\\Quelle: Generierung des Referenzstrom durch Transistor (Eigene Darstellung)}
+    \label{fig:Vref&Vres}
+\end{figure}
+%\vspace{1.5\baselineskip}

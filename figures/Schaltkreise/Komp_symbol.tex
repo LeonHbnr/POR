@@ -1,0 +1,21 @@
+%\vspace{1.5\baselineskip}
+\begin{figure}[H]
+    \begin{center}
+        \begin{circuitikz}[european]
+            \ctikzset{tripoles/mos style/arrows}[line width=thick, european]
+            % Komparator    
+            \draw (0,0) node[op amp] (triangle){}; 
+            \draw (triangle) node[above, yshift=27pt] {Komparator};
+            \draw (triangle.out) -- ++(1,0) node[above]{$V_{out}$};    
+            \draw (triangle.+) -- ++(-1,0) node[above]{$V_{inp}$};
+            \draw (triangle.-) -- ++(-1,0) node[above]{$V_{inn}$};
+
+            \draw (7,0.5) node[]{$V_{inp} > V_{inn}$ \hspace{5pt} \textbf{dann} \hspace{5pt} $V_{out} = V_{DD} =$ logische 1};
+            \draw (7,-0.5) node[]{$V_{inp} < V_{inn}$ \hspace{5pt} \textbf{dann} \hspace{5pt} $V_{out} = 0 =$ logische 0};
+
+        \end{circuitikz}
+    \end{center}
+    \caption[Schaltzeichen Komparator]{\\Quelle: Eigene Darstellung Schaltzeichen Komparator in Anlehnung an \cite[S. 909]{CircuitDesigLayoutAndSimulation}}
+    \label{fig:Komp}
+\end{figure}
+% \vspace{1.5\baselineskip}

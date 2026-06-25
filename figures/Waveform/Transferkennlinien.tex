@@ -1,0 +1,87 @@
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+    \ctikzset{tripoles/mos style/arrows}[line width=thick, european]
+´         % NMOS-Transistor-Symbol auf der linken Seite
+        \begin{scope}[xshift=-3cm] % Verschiebung des Symbols nach links
+            \draw (0,2) node[nmos](nmos){};
+            \node[above] at (nmos.gate) {$G$}
+                (nmos.gate) -- ++(-0.1,0) coordinate(gate)
+                node[circle, draw,inner sep=1.5pt]{};
+            \node[below, yshift=-5pt] at (nmos.source) {$S$}
+                (nmos.source) -- ++(0,-0.1) coordinate(source)
+                node[circle, draw,inner sep=1.5pt]{};
+            \node[left] at (nmos.drain) {$D$}
+                (nmos.drain) -- ++(0,0.1) coordinate(drain)
+                node[circle, draw,inner sep=1.5pt]{};
+
+            \draw[->, shorten >=5pt, shorten <=5pt, >=stealth] (drain) to[out=-45,in=45] (source)
+                node[xshift=22pt, yshift=25pt]{\footnotesize{$V_{DS}$}};
+            \draw[<-, shorten <=5pt, >=stealth] (drain) -- ++ (0,.75) 
+                node[right, midway, yshift=5pt]{\footnotesize{$I_D$}};
+            \draw[->, shorten >=5pt, shorten <=5pt, >=stealth] (gate) to[out=-90,in=180] (source)
+                node[xshift=-25pt]{\footnotesize{$V_{GS}$}};
+            \fill[white] (2,1) rectangle (2.975,0);
+        \end{scope}
+
+        \begin{axis}[
+            xlabel={$V_{GS}$},
+            ylabel={$I_D$},
+            xmin=0, xmax=4,
+            ymin=0, ymax=300,
+            xtick=\empty, % Entfernt die Ticks und Beschriftungen der X-Achse
+            ytick=\empty,
+            width=7cm,
+            height=6cm,
+            %title={MOSFET Transferkennlinie},
+            %title style={yshift=10pt}, % Abstand zwischen Titel und Grafik erhöhen
+            %legend pos=north west,
+            axis lines=middle, % Achsen in der Mitte mit Pfeilen
+            xlabel style={at={(ticklabel* cs:1)}, anchor=north west, xshift=-10pt}, % Beschriftung neben    dem Pfeil
+            ylabel style={at={(ticklabel* cs:1)}, anchor=south east, yshift=-10pt}, % Beschriftung neben    dem Pfeil
+            minor tick num=0, % Schrittweite entfernen
+            minor y tick num=0,
+            extra x ticks={1.5}, % Markierung bei V_GS = 1.5
+            extra x tick labels={$V_{th}$}, % Beschriftung der Markierung
+            extra x tick style={
+                grid=none, % Keine Gitterlinie bei der Markierung
+                tick pos=left % Tick auf der linken Seite der Achse
+            }
+        ]
+        
+        % Beispiel: Quadratische Kennlinie im Sättigungsbereich
+        \addplot[
+            domain=1.5:4, % V_GS von 1V bis 7V
+            samples=100,
+            color=blue,
+            thick,
+        ] {150 * (x - 1.5)^4}; 
+        \addplot[
+            domain=0:1.5,
+            samples=100,
+            color=blue,
+            thick,
+        ] {0};
+    
+    
+        \addplot[
+            domain=1.5:4, % V_GS von 1V bis 7V
+            samples=100,
+            color=red,
+            thick,
+            style=dashed
+        ] {100 * (x - 1.5)^4};
+    
+        \addplot[
+            domain=1.5:4, % V_GS von 1V bis 7V
+            samples=100,
+            color=red,
+            thick,
+            style=dashed
+        ] {250 * (x - 1.5)^4};
+        
+        \end{axis}
+    \end{tikzpicture}
+    \caption[Symbol NMOS-Transistor mit Transferkennlinie]{\\Quelle: Eigene Darstellung Symbol NMOS-Transistor mit Transferkennlinie in Anlehnung an \cite[S. 268]{MicroelectronicCircuits}}
+    \label{fig:MOSFET_Transferkennlinie}
+\end{figure}

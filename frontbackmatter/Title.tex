@@ -1,0 +1,84 @@
+\thispagestyle{empty}
+\pdfbookmark[0]{Titelblatt}{title}
+\newgeometry{margin=30mm}
+\begin{titlepage}
+
+	% If printed on two sides, center the title page
+	%\condTWOSIDE{\changetext{}{19mm}{}{19mm}{}}
+
+	\vspace{1cm}
+	\begin{center}
+		\includegraphics[width=7.7cm]{figures/CD/DHSN-Logo} \\ 
+	\end{center}
+
+	\begin{center}
+		\vspace{0.1cm}
+		\huge \textbf{\myAcademy}\\
+		\vspace{0.4cm}
+		\LARGE -- \myStudy\ --
+	\end{center}
+
+	\vfill
+
+	\ifthenelse{\boolean{lockflag}}{
+	\begin{center}
+        \includegraphics[width=1cm]{figures/exclamationmark.pdf}\\
+		\color{HKS14-100}\textbf{Nur zur Begutachtung\\ {\small(Sperrvermerk)}}
+	\end{center}
+	}{}
+
+	\vfill
+
+	\begin{center}
+		\LARGE \textbf{\myTitle}
+		\ifdef{\mySubtitle}{\vspace{0.2cm}\\ \large \mySubtitle}{}
+	\end{center} 
+
+	\vfill
+	\vfill
+
+	\begin{center}
+		\Large Projektarbeit\\ \enquote{Ingenieurm"aßiges Arbeiten}\\
+		\vspace{0.3cm}
+	\end{center}
+
+	\vfill
+
+	\begin{center}
+        \vspace{0.3cm}
+		  \Large \textbf{\myName}\\
+		  \vspace{0.3cm}
+		  \normalsize Matrikelnummer: \myId\\
+        \vspace{0.3cm}
+        \begin{tabular}{ll}
+            \normalsize Tag der Themenübergabe: & \myDeclarationDate\\
+		      \normalsize Tag der Einreichung: & \mySubmissionDate\\
+        \end{tabular}
+	\end{center}
+
+	\vfill
+	\vfill
+
+	\begin{center}
+		\begin{tabular}{ll}
+		  Ausbildender Praxispartner:   & \myCompany\\
+		                                & \myCompanyAddress\\
+		  Begutachtung Praxispartner:   & \myExpert\\
+		\end{tabular}
+	\end{center} 
+
+	% If printed on two sides, center the title page
+
+\end{titlepage}
+\restoregeometry
+\thispagestyle{empty}
+
+%\hfill
+
+%\vfill
+%
+%\ifthenelse{\boolean{lockflag}}{{\noindent\color{HKS14-100}\textbf{\Large Sperrvermerk}\vspace{.5em}\\\normalsize Diese Ausarbeitung darf nicht ohne Genehmigung des betreuenden Praxispartners (\myCompany) zugänglich gemacht werden. Davon ausgenommen sind die am Prü\-f\-ungs\-ver\-fah\-ren beteiligten Personen, insbesondere ist der Zugang für die Be\-gut\-ach\-ten\-den sicher zu stellen.}}{}
+%
+%\vfill
+
+%\noindent\textcopyright\ \mySubmissionDate, \myName

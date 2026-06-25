@@ -1,0 +1,27 @@
+\chapter{Abbildungen}\label{apdx:A}
+
+% Nummerierung auf A1, A2, etc. umstellen
+\renewcommand{\thefigure}{A.\arabic{figure}}
+\setcounter{figure}{0} % Zähler zurücksetzen
+
+%\section{Abbildungen}\label{sec:apdx:Abbildungen}
+\captionsetup[figure]{justification=raggedright, singlelinecheck=false, labelsep=colon}
+\clearpage
+
+\input{figures/Schaltkreise/PoR_complete}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{figures/CD/vref_old.png}
+    \caption{Schwankung der Referenzspannung mit Widerstand}
+    \label{fig:Vref_fluctuation_old}
+    \addcontentsline{app}{figure}{\protect\numberline{\thefigure} Schwankung der Referenzspannung mit Widerstand}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{figures/CD/vref_test1.png}
+    \caption{Schwankung der Referenzspannung mit Transistoren}
+    \label{fig:Vref_Variation}
+    \addcontentsline{app}{figure}{\protect\numberline{\thefigure} Schwankung der Referenzspannung mit Transistoren}
+\end{figure}

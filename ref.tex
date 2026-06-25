@@ -1,0 +1,156 @@
+%% Zitierstil für BibLaTeX
+\usepackage[backend=biber,style=numeric,sorting=nyt,backref=true]{biblatex}
+\addbibresource{bibliography.bib} % Pfad zu Ihrer .bib-Datei
+
+% Formatierung der Rückverweise
+\DefineBibliographyStrings{ngerman}{%
+  backrefpage = {zitiert auf Seite}, % Singular
+  backrefpages = {zitiert auf Seiten}, % Plural
+}
+
+% % Sicherstellen, dass die Zitate klickbar sind
+% \DeclareCiteCommand{\cite}[\mkbibbrackets]
+%   {\usebibmacro{prenote}}
+%   {\printtext[bibhyperref]{\printfield{labelalpha}}} % Verwendet die Kürzel wie [HZ21]
+%   {\multicitedelim}
+%   {\usebibmacro{postnote}}
+% 
+% % Falls mehr als zwei Autoren: "HZe21"
+% \renewcommand*{\labelalphaothers}{Z}
+
+% Zitierstil für online Quellen 
+\DeclareBibliographyDriver{online}{%
+  \printnames{author}%
+  \setunit{\addspace}%
+  \printtext[parens]{\printfield{year}}%
+  \setunit{\addcolon\space}%
+  \printfield{title}%
+  \newunit% Punkt hinter Titel
+  \printlist{publisher}%
+  \setunit{\addcomma\space}% Komma ohne Leerzeichen
+  \printtext{in:}% ", in:" ohne Leerzeichen
+  \setunit{\addspace}% Leerzeichen nach "in:"
+  \printfield{url}%
+  \setunit{\addcomma\space}%
+  \printurldate%
+  \printtext{\addperiod}% Hier wird der Punkt hinzugefügt
+  \newunit
+  \printfield{note}
+  \setunit{\addspace}
+  \printfield{postnote}
+  \newunitpunct\newline
+  \usebibmacro{pageref}% Rückverweise hinzufügen
+}
+
+% Zitierstil für Artikel 
+\DeclareBibliographyDriver{article}{%
+  \printnames{author}%
+  \setunit{\addspace}%
+  \printtext[parens]{\printfield{year}}%
+  \setunit{\addcolon\space}%
+  \printfield{title}%
+  \setunit{\addcomma\space}% Komma ohne Leerzeichen
+  \printtext{in:}% ", in:" ohne Leerzeichen
+  \setunit{\addspace}%
+  \printfield{journaltitle}%
+  \setunit{\addcomma\space}% 
+  \printfield{pages}
+  \setunit{\addcomma\space}
+  \printfield{url}
+  \setunit{\addcomma\space}
+  \printurldate
+  \newunitpunct
+  \newline
+  \usebibmacro{pageref}% Rückverweise hinzufügen
+}
+
+% Zitierstil für Bücher 
+\DeclareBibliographyDriver{book}{%
+  \printnames{author}%
+  \setunit{\addspace}%
+  \printtext[parens]{\printfield{year}}%
+  \setunit{\addcolon\space}%
+  \printfield{title}%
+  \setunit{\addcomma\space}% Komma ohne Leerzeichen
+  \printfield{subtitle}%
+  \printlist{publisher}%
+  \setunit{\addcomma\space}%
+  \iffieldundef{edition}{}{%
+    \printfield{edition}%
+    \setunit{\addcomma\space}%
+  }%
+  \setunit{\addcomma\space}
+  \printfield{url}
+  \setunit{\addcomma\space}
+  \printfield{pages}
+  \setunit{\addcomma\space}
+  \printurldate
+  \setunit{\addperiod}
+  \newunitpunct\newline
+  \usebibmacro{pageref}%
+}
+
+% Zitierstil für Paper 
+\DeclareBibliographyDriver{inproceedings}{%
+  \printnames{author}%
+  \setunit{\addspace}%
+  \printtext[parens]{\printfield{year}}% Jahreszahl direkt nach Autorennamen
+  \setunit{\addcolon\space}%
+  \printfield{title}% Titel des Papers
+  \setunit{\addcomma\space}%
+  \printfield{booktitle}% Name der Konferenz
+  \setunit{\addcomma\space}% Komma ohne Leerzeichen
+  \iffieldundef{volume}{}{Bd. \printfield{volume}, }% Falls vorhanden, Band drucken
+  \iffieldundef{number}{}{Nr. \printfield{number}, }% Falls vorhanden, Nummer drucken
+  \iffieldundef{pages}{}{\printfield{pages}}% Falls vorhanden, Seiten drucken
+  \setunit{\addcomma\space}% Komma ohne Leerzeichen
+  \printtext{in:}%
+  \setunit{\addspace}%
+  \href{https://doi.org/\thefield{doi}}{\printfield{doi}}% DOI drucken
+  \setunit{\addcomma\space}% Komma als Trennzeichen
+  \printurldate% Zugriffsdatum hinzufügen
+  \newline
+  \usebibmacro{pageref}% Rückverweis auf Seitenzahl
+}
+
+% Zitierstil für Artikel 
+\DeclareBibliographyDriver{online}{%
+  \printnames{author}%
+  \setunit{\addspace}%
+  \printtext[parens]{\printfield{year}}%
+  \setunit{\addcolon\space}%
+  \printfield{title}%
+  \setunit{\addcomma\space}% Komma ohne Leerzeichen
+  \printtext{in:}% ", in:" ohne Leerzeichen
+  \setunit{\addspace}%
+  \printfield{journaltitle}%
+  \setunit{\addcomma\space}% 
+  \printfield{pages}
+  \setunit{\addcomma\space}
+  \printfield{url}
+  \setunit{\addcomma\space}
+  \printurldate
+  \newunitpunct
+  \newline
+  \usebibmacro{pageref}% Rückverweise hinzufügen
+}
+
+% Doppelpunkt nach Jahreszahl 
+\renewcommand{\labelnamepunct}{\addcolon\space}
+
+% Anpassung der Namestrenner
+\DeclareNameAlias{author}{family-given}
+\DeclareDelimFormat{multinamedelim}{\addslash} % Schrägstrich zwischen Autoren
+\DeclareDelimFormat{finalnamedelim}{\addslash} % Schrägstrich zwischen letzten Autoren
+  
+% Anpassung der URL- und Datumsformatierung
+\DeclareFieldFormat{urldate}{\mkbibparens{Zuletzt abgerufen am\addcolon\space#1}.}
+\DeclareFieldFormat{url}{\url{#1}}
+\DeclareFieldFormat{note}{\mkbibparens{#1}}
+\DeclareFieldFormat{doi}{\url{https://doi.org/#1}} % Entfernt das "doi:" Präfix
+\DeclareFieldFormat{title}{#1} % Verhindert Anführungszeichen um den Titel
+\DeclareFieldFormat{journaltitle}{#1} % Verhindert Anführungszeichen bei Journalnamen
+\DeclareFieldFormat{booktitle}{#1} % Verhindert Anführungszeichen bei Buch- oder Konferenztitel
+
+% Zusätzlich sicherstellen, dass \mkbibquote nicht mehr aufgerufen wird
+\AtBeginBibliography{\renewcommand*{\mkbibquote}[1]{#1}} 

@@ -1,0 +1,96 @@
+%\vspace{1.5\baselineskip}
+\begin{figure}[H]
+    \begin{center}
+        \begin{circuitikz}
+            \ctikzset{tripoles/mos style/arrows}[line width=thick]
+            \draw % Transformatoren 
+            (1.5,0) node[pmos, emptycircle, yscale=-1, rotate=180](pmosR){}
+                node at (pmosR.center) [anchor=center, xshift=-10pt] {$P_2$}
+            (5,0) node[pmos, emptycircle](pmosR1){$P_3$}
+            (-1.5,0) node[pmos, emptycircle](pmosL){$P_1$} 
+            (-5,0) node[pmos, emptycircle, yscale=-1, rotate=180](pmosL1){}
+                node at (pmosL1.center) [anchor=center, xshift=-10pt] {$P_0$}
+            
+            (-1.5,-3) node[nmos, emptycircle](nmosL){$N_0$}
+            (-5,-6) node[nmos, emptycircle, yscale=-1, rotate=180](nmosL1){}
+                node at (nmosL1.center) [anchor=center, xshift=-10pt] {$N_2$}
+            (1.5,-3) node[nmos, emptycircle, yscale=-1, rotate=180](nmosR){}
+                node at (nmosR.center) [anchor=center, xshift=-10pt] {$N_1$}
+            (5,-6)node[nmos, emptycircle](nmosR1){$N_4$}
+    
+            (0,-6) node[nmos, emptycircle](nmos){$N_3$}
+    
+            % Verbindung zwischen Transformatoren
+            (pmosR.drain) -- (nmosR.drain){}
+                coordinate[pos=0.5](crosspointRR) % Mittelpunk zwischen pmosR und nmosR
+            (pmosL.drain) -- (nmosL.drain){}
+                coordinate[pos=0.5](crosspointLL) % Mittelpunk zwischen pmosL und nmosL
+            (nmosL.source) -| (nmos.drain) |- (nmosR.source){}
+
+            (pmosL1.drain) -- (nmosL1.drain){}
+            (pmosR1.drain) -- (nmosR1.drain){}
+                coordinate[pos=0.5](Vout)
+
+            (pmosL1.gate) -- (pmosL.gate){}
+                coordinate[pos=0.5](MPL)
+            (pmosR1.gate) -- (pmosR.gate){}
+                coordinate[pos=0.5](MPR)
+            
+            % Knoten und Verbindungen 
+            (crosspointLL) node[circle, fill, inner sep=1.5pt]{} % Knoten links
+            (crosspointRR) node[circle, fill, inner sep=1.5pt]{}
+            (Vout) node[circle, fill, inner sep=1.5pt]{}
+                (Vout) -- ++(1,0)
+                    node[pos=0, above right, xshift=15pt]{$V_{out}$}
+            (MPL) node[circle, fill, inner sep=1.5pt]{}
+                (MPL) |- (crosspointLL) 
+            (MPR) node[circle, fill, inner sep=1.5pt]{}
+                (MPR) |- (crosspointRR)
+
+            (0,-4.5) -- ++(-5,0)
+                node[circle, fill, inner sep=1.5pt]{}
+            (0,-4.5) -- ++(3.25,0) coordinate[pos=1](Rechts)
+                (Rechts) |- (nmosR1.gate)
+
+            (nmosL1.gate) -- ++(.77,0) -- ++(0,1.5) 
+                node[circle, fill, inner sep=1.5pt]{}
+
+            (nmosL1.source) -- ++(0,-0.25)
+                coordinate(Lvss)  
+            (nmosR1.source) -- ++(0,-0.25)
+                coordinate(Rvss)
+            (nmos.source) -- ++(0,-0.25)
+                coordinate[pos=0.5](Source)
+                    node[circle, fill, inner sep=1.5pt]{}
+            (Lvss) -- (Rvss) 
+                
+            % Verbindung nmos.gate
+            (nmosL.gate) -- ++(-.5,0)
+                node[pos=0, above left]{$V_{inn}$}
+            (nmosR.gate) -- ++(.5,0)
+                node[pos=0, above right]{$V_{inp}$}
+            (nmos.gate) -- ++(-.5,0)
+                node[pos=0, above left]{$V_{ref}$}
+    
+            % Ground
+            (Source) -- ++(0,-0.5)
+                node [sground]{}
+                node[right, xshift=5pt, yshift=-5pt]{Gnd}
+
+            % Vdd connection 
+            (pmosL1.source) -- ++ (0,0.25) 
+                node[circle, fill, inner sep=1.5pt]{}
+            (pmosL.source) -- ++ (0,0.25)
+                node[circle, fill, inner sep=1.5pt]{}
+            (pmosR.source) -- ++ (0,0.25)
+                node[circle, fill, inner sep=1.5pt]{}
+            (pmosR1.source) -- ++ (0,0.25) -- ++(-11,0)
+                node[above ]{$V_{DD}$}
+            ;
+    
+        \end{circuitikz}
+    \end{center}
+    \caption[Aufbau Komparator für digitalen Teil]{\\Quelle: Eigene Darstellung Aufbau Komparator für den digitalen Teil in Anlehnung an \cite[S. 1217]{opamp}}
+    \label{fig:komparator1.5}
+\end{figure}
+% \vspace{1.5\baselineskip}

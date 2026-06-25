@@ -1,0 +1,68 @@
+%\vspace{1.5\baselineskip}
+\begin{figure}[H]
+    \begin{center}
+        \begin{circuitikz}[european]
+            \ctikzset{tripoles/mos style/arrows}[line width=thick, european]
+            
+            % Transistoren links
+            \draw (-4,0) node[pmos, emptycircle, yscale=-1, rotate=180](pmosL){}
+                node at (pmosL.center) [anchor=center, xshift=-10pt]{$P_0$}
+                (-4,-3) node[nmos](nmosL){$N_0$};
+                
+            % Transistoren rechts
+            \draw (0,0) node[pmos, emptycircle](pmosR1){$P_1$}
+                (0,-3) node[pmos, emptycircle](pmosR2){$P_2$}
+                (0,-6) node[nmos](nmosR){$N_1$};
+                
+            % Verbindungen Transistroen links
+            \draw (pmosL.drain) -- (nmosL.drain) 
+                coordinate[pos=0.5](crosspointLL) % Mitte links
+                (crosspointLL) node[circle, fill, inner sep=1.5pt]{}; % Verzweigung links 
+                
+            % Verbindung pmos gate
+            \draw (pmosL.gate) -- (pmosR1.gate)
+                coordinate[pos=0.5](crosspointPP)
+                (crosspointPP) node[circle, fill, inner sep=1.5pt]{};
+            \draw (nmosL.gate) -- ++(-.5,0)
+                node[above]{$V_{gate}$}
+                (nmosL.source) node[sground]{}
+                node[right, xshift=5pt, yshift=-5pt]{Gnd};
+                
+            % Kurzschluss 
+            \draw (crosspointLL) -| (crosspointPP);
+
+            % VDD
+            \draw (pmosL.source) -- ++(0,0.5) 
+                node[circle, fill, inner sep=1.5pt]{};
+            \draw (pmosR1.source) -- ++(0,0.5) -- ++(-5.475,0) 
+                node[above]{$V_{DD}$};
+                
+                
+            % Verbindungen rechts    
+            \draw (pmosR1.drain) -- (pmosR2.source)
+                (pmosR2.drain) -- (nmosR.drain)
+                    coordinate[pos=0.5](crosspointRR) % Mittelpunkte rechts
+                    (crosspointRR) node[circle, fill, inner sep=1.5pt]{}
+                (nmosR.source) -- ++(2,0) coordinate[](nmosC)
+                (nmosC) node[circle, fill, inner sep=1.5pt]{};
+                
+            % Gate rechts
+            \draw (pmosR2.gate) -- ++(-0.5,0)
+                    -- ++(0,-3) node[circle, fill, inner sep=1.5pt]{}
+                (nmosR.gate) -- ++(-4.5,0) 
+                    node[above]{$V_{comp}$};
+                    
+            % Kondensator 
+            \draw (2,-4.5) node[circle, fill, inner sep=1.5pt]{}
+                (2,-4.5) to[C, l={$C$}] (2,-6.5) -- (nmosC)
+                (nmosC) -- ++(0,-0.25) node[sground]{}
+                node[right, xshift=5pt, yshift=-5pt]{Gnd};
+            \draw (crosspointRR) -- ++(4,0)
+                node[above]{$V_{schmitt}$};
+                
+        \end{circuitikz}
+    \end{center}
+    \caption[Verzögerungselement]{\\Quelle: Verzögerungselement (eigene Darstellung)}
+    \label{fig:Delay}
+\end{figure}
+% \vspace{1.5\baselineskip}

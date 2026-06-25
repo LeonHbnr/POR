@@ -1,0 +1,86 @@
+\RequirePackage{silence}
+\WarningFilter{remreset}{The remreset package}
+%
+% Eigentlicher Beginn des Dokuments
+%
+\documentclass[a4paper,
+% pagebackref, % auskommentieren, falls Sie BibLaTeX benutzen
+oneside, % Kommentarmarker entfernen, falls Sie einseitig binden wollen
+% Der folgenden Zeile Kommentarmarker entfernen, falls Sie ein PDF-A benötigen
+% pdfa,pdfapart=2,pdfaconformance=A,extension=pdf
+]{book}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{ifthen}
+%
+% Alle Anpassungen der Titelseite erledigen Sie in der folgenden Datei
+%
+\input{config}
+\input{ref}
+%
+% Sil-ben-tren-nung
+%
+\hyphenation{Do-nau-dampf-schiff-fahrt}
+\hyphenation{Me-tall-oxid}
+\hyphenation{Halb-lei-ter}
+\hyphenation{Wi-der-stand}
+\hyphenation{de-signt}
+%
+% Ab hier der eigentliche LaTeX-Satz
+%
+\begin{document}
+\selectlanguage{ngerman}
+\include{frontbackmatter/Glossary}
+\frontmatter
+\pagenumbering{Alph}
+\pagestyle{plain}
+\include{frontbackmatter/Title}
+\pagenumbering{alph}
+%\ifthenelse{\boolean{frontdeclaration}}{%
+%    \include{frontbackmatter/Declaration}%
+%    \cleardoublepage%
+%}{}
+%\include{frontbackmatter/Abstract}
+%\cleardoublepage\label{taskpage}
+%\ifthenelse{\boolean{auftragsblatt}}{
+%    \includepdf[pagecommand={}]{Auftragsblatt.pdf}
+%}
+{
+    \setcounter{page}{\value{page}+1}
+}
+\include{frontbackmatter/tocLists}
+
+\mainmatter
+\pagenumbering{arabic}
+\pagestyle{myfancy}
+\part{Projektarbeit}
+\include{chapters/Einleitung}
+\include{chapters/Grundlagen}
+\include{chapters/Schaltung}
+\include{chapters/Verifizierung}
+\include{chapters/Fazit}
+%*************************************************************************
+% Literaturverzeichnis
+%*************************************************************************
+\cleardoublepage
+\include{frontbackmatter/Bibliography}
+%*************************************************************************
+% Anhang
+%*************************************************************************
+%\backmatter
+\appendix
+\cleardoublepage
+\pagenumbering{Roman}
+\part{Anhang}
+\include{chapters/AppendixA}
+\include{chapters/AppendixB}
+%
+% Ende
+%
+\pagestyle{plain}
+\include{frontbackmatter/Acknowledgements}
+\ifthenelse{\boolean{frontdeclaration}}{}{%
+    \include{frontbackmatter/Declaration}%
+}
+\end{document}

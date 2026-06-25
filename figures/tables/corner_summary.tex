@@ -1,0 +1,22 @@
+\begin{table}[H]
+    \centering
+    \small
+    \begin{tabular}{c|l|c|c|c}
+        {\rotatebox{90}{\parbox{1.8cm}{\textbf{Spannung}}}} &
+        \textbf{\makecell{Werte}} &
+        \textbf{\makecell{Spezifikation}} &
+        \textbf{\makecell{Min. Wert}} &
+        \textbf{\makecell{Max. Wert}} \\
+        \midrule
+
+        \multirow{5}{*}{\rotatebox{90}{5 V}} &
+        Verzögerung steigende Flanke & 20 us $\leq$ x $\leq$ 130 us & 24.37 us & 126.5 us \\
+        & Verzögerung fallende Flanke & $\leq$ 1 us & 34.53 ns & 138 ns \\
+        & Schwellspannung steigend & 2.2 V $\leq$ x $\leq$ 2.6 V & 2.206 V & 2.577 V \\
+        & Schwellspannung fallend & 2.1 V $\leq$ x $\leq$ 2.5 V & 2.153 V & \cellcolor{lightyellow}2.515 V \\
+        & Hysterese & 50 mV $\leq$ x $\leq$ 120 mV & 52.96 mV & 63.08 mV \\
+        \midrule
+    \end{tabular}
+    \caption{Ergebnisse Corner-Simulation PoR-Schaltung für den analogen Teil}
+    \label{tab:corner_summary}
+\end{table}

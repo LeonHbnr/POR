@@ -1,0 +1,65 @@
+%\vspace{1.5\baselineskip}
+\begin{figure}[H]
+    \begin{center}
+        \begin{circuitikz}
+            \ctikzset{tripoles/mos style/arrows}[line width=thick]
+            \draw % Transformatoren 
+            (0,2.5) node[pmos, emptycircle](pmos1){$P_0$}
+            (3,0.95) node[pmos, emptycircle](pmos2){$P_2$}
+            (0,0) node[pmos, emptycircle](pmos3){$P_1$} 
+            (0,-2) node[nmos](nmos1){$N_0$}
+            (3,-2.95) node[nmos](nmos2){$N_2$}
+            (0,-4.5) node[nmos](nmos3){$N_1$};
+        
+            %Verbindung zwischen Transistoren
+            \draw (pmos1.drain) -- (pmos3.source); % Verbindung von pmos1 zu pmos3 (senkrecht)
+            \draw (pmos2.source) -- (pmos1.drain) % Verbindung zu pmos2 
+                node[circle, fill, inner sep=1.5pt] {}; % Punkt an Verbindung
+            \draw (pmos3.drain) -- (nmos1.drain); % Verbindung von pmos3 zu nmos1 
+            \draw (nmos1.source) -- (nmos3.drain); % Verbindung von nmos1 zu nmos3
+            \draw (nmos2.source) -- (nmos3.drain) % Verbindung zu noms2 
+                node[circle, fill, inner sep=1.5pt] {};
+            \draw (nmos3.source) 
+                node[sground] {}
+                node[right, xshift=5pt, yshift=-5pt]{Gnd};
+            \draw (pmos2.drain)
+                node[sground,] {}
+                node[right, xshift=5pt, yshift=-5pt]{Gnd}; % Ground an pmos2
+            \draw (pmos2.gate) -- (nmos2.gate) 
+                coordinate[pos=0.5](crosspoint); % Mittelpunkt der Verbindung 
+            
+            % Vin                           
+            \draw (-2.5,-1) -- (-1.5,-1) coordinate (Vin)% Vin Linie (zu Gates)
+                node[pos=0, above left, xshift=10pt] {$V_{in}$} % Beschriftung oberhalb der Linie
+                node [circle, fill, inner sep=1.5pt] {};
+
+            %Vin connections 
+            \draw (5,-1) -- (0,-1) % Vout Linie
+                node [pos=0, above right, xshift=-25pt] {$V_{out}$}
+                node [circle, fill, inner sep=1.5pt] {};
+            \draw (crosspoint) node[circle, fill, inner sep=1.5pt] {}; % Punkt an Kreuzung
+            \draw % Verbindung der Gates
+                (pmos1.gate) -- ++(-0.5,0) -- (Vin);
+            \draw % Verbindung der Gates
+                (nmos3.gate) -- ++(-0.5,0) -- (Vin);
+            \draw % Verbindung der Gates
+                (pmos3.gate) -- ++(-0.5,0) 
+                node[circle, fill, inner sep=1.5pt] {};
+            \draw % Verbindung der Gates
+                (nmos1.gate) -- ++(-0.5,0) 
+                node[circle, fill, inner sep=1.5pt] {};    
+
+            % VDD 
+            \draw (-0.5,3.5) -- (0.5,3.5) % VDD an pmos1
+                node[midway, above] {$V_{DD}$} % Beschriftung oberhalb der Linie
+                (0,3.5) -- (pmos1.source);
+            \draw (2.5,-1.95) -- (3.5,-1.95) % VDD an nmos2
+                node[midway, above] {$V_{DD}$} % Beschriftung oberhalb der Linie
+                (3,-1.95) -- (nmos2.drain); 
+                
+        \end{circuitikz}
+    \end{center}
+    \caption[Aufbau Schmitt-Trigger]{\\Quelle: Eigene Darstellung Aufbau Schmitt-Trigger in Anlehnung an \cite[S. 524]{CircuitDesigLayoutAndSimulation}}
+    \label{fig:schmitt-trigger}
+\end{figure}
+%\vspace{1.5\baselineskip}

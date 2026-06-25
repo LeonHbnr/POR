@@ -1,0 +1,67 @@
+%\vspace{1.5\baselineskip}
+\begin{figure}[H]
+    \begin{center}
+        \begin{circuitikz}
+            \ctikzset{tripoles/mos style/arrows}[line width=thick]
+            \draw % Transformatoren 
+            (3,0) node[pmos, emptycircle](pmosR){$P_2$}
+            (-3,0) node[pmos, emptycircle, yscale=-1, rotate=180](pmosL){} 
+                node at (pmosL.center) [anchor=center, xshift=-10pt] {$P_1$}
+            
+            (-3,-3) node[nmos, emptycircle](nmosL){$N_1$}
+            (3,-3) node[nmos, emptycircle, yscale=-1, rotate=180](nmosR){}
+                node at (nmosR.center) [anchor=center, xshift=-10pt] {$N_2$}
+    
+            (0,-5) node[nmos, emptycircle](nmos){$N_3$}
+    
+            % Verbindung zwischen Transformatoren
+            (pmosR.drain) -- (nmosR.drain){}
+                coordinate[pos=0.5](crosspointRR) % Mittelpunk zwischen pmosR und nmosR
+            (pmosL.drain) -- (nmosL.drain){}
+                coordinate[pos=0.5](crosspointLL) % Mittelpunk zwischen pmosL und nmosL
+            (nmosL.source) -- ++(0,-0.25) -- ++(3,0)
+            (nmosR.source) -- ++(0,-0.25) -- ++(-3,0) coordinate(Ibias)
+                (Ibias) node[circle, fill, inner sep=1.5pt]{}
+            (Ibias) -- (nmos.drain)
+            
+            (pmosL.source) -- ++(0,0.5) coordinate (tmp1) 
+                -- ++(6,0) coordinate (tmp2) % rechte obere Koordinate
+                -- (pmosR.source) coordinate (tmp3)
+                (tmp1) -- (tmp2)
+                    coordinate[pos=0.5](crosspointVdd)
+                        (crosspointVdd) -- ++(0,0.5) coordinate(VDD)
+                            node[above] {$V_{DD}$} % Text zwische Koordinate 1 und 2
+                        (VDD) -- ++(-0.5,0)
+                        (VDD) -- ++(0.5,0)
+    
+            (pmosL.gate) -- (pmosR.gate){}
+                coordinate[pos=0.5](crosspointLR) % Mittelpunk zwischen pmosL und pmosR
+    
+            % Knoten und Verbindungen 
+            (crosspointLL) node[circle, fill, inner sep=1.5pt]{} % Knoten links
+            (crosspointLR) node[circle, fill, inner sep=1.5pt]{} % Knoten mitte
+            (crosspointLL) -| (crosspointLR){} % Verbindung zwischen linken und mittleren Knoten
+            (crosspointRR) node[circle, fill, inner sep=1.5pt]{}
+                (crosspointRR) -- ++(1.5,0)
+                    node[pos=1, above right, xshift=-15pt]{$V_{out}$}
+            
+            % Verbindung nmos.gate
+            (nmosL.gate) -- (-4.5,-3)
+                node[pos=0, above left]{$V_{inn}$}
+            (nmosR.gate) -- (4.5,-3)
+                node[pos=0, above right]{$V_{inp}$}
+            (nmos.gate) -- (-1.5,-5)
+                node[pos=0, above left]{$V_{ref}$}
+    
+            % Ground
+            (nmos.source) 
+                node [sground]{}
+                node[right, xshift=5pt, yshift=-5pt]{Gnd}
+            ;
+    
+        \end{circuitikz}
+    \end{center}
+    \caption[Aufbau Komparator für analogen Teil]{\\Quelle: Aufbau Komparator für analogen Teil (eigene Darstellung)}
+    \label{fig:komparator}
+\end{figure}
+% \vspace{1.5\baselineskip}

@@ -1,0 +1,41 @@
+%\vspace{1.5\baselineskip}
+\begin{figure}[H]
+    \begin{center}
+        \begin{circuitikz}[european]
+            \ctikzset{tripoles/mos style/arrows}[line width=thick, european]
+             % Schmitt-Trigger mit Eingangs- und Ausgangsbezeichnung
+            \draw (-4,1) node[schmitt] (schmitt){}; 
+            \draw (schmitt) node[above, yshift=27pt] {Schmitt-Trigger};
+            
+            \draw (schmitt.in) -- ++(-1,0) node[above]{$V_{in}$}; % Eingangsleitung
+            \draw (schmitt.out) -- ++(1,0) node[above]{$V_{out}$}; % Ausgangsleitung
+
+            \draw[->, thick] (0,0) -- ++(0,4) node[above]{$V_{out}$}
+                coordinate[pos=5/6](VDDy);
+                \draw (VDDy) node[left]{\tiny{$V_{DD}$}};
+            
+            \draw[->, thick] (0,0) -- ++(4,0) node[right]{$V_{in}$}
+                coordinate[pos=2/7](VL)
+                coordinate[pos=5/7](VH)
+                coordinate[pos=10/11](VDD);
+
+            \draw (VDD) -- ++(0,0.1)
+                (VDD) -- ++(0,-0.1) node[below]{\tiny{$V_{DD}$}};
+
+            \draw[rounded corners=5pt] (VDDy) -| (VL) -- (VDD);
+            \draw[->] (VL) ++(0,2.5) -- ++(0,-2pt);
+            \draw[->] (VL) ++(0,0.75) -- ++(0,-2pt);
+
+            \draw[rounded corners=5pt] (VDDy) -| (VH) -- (VDD);
+            \draw[->] (VH) ++(0,2.5);
+            \draw[->] (VH) ++(0,0.75);
+            
+            \draw (VH) node[below, xshift=5pt]{\tiny{$V_H$}};
+            \draw (VL) node[below, xshift=5pt]{\tiny{$V_L$}};
+
+        \end{circuitikz}
+    \end{center}
+    \caption[Symbol Schmitt-Trigger]{\\Quelle: Eigene Darstellung Symbol Schmitt-Trigger in Anlehnung an \cite[S. 909]{CircuitDesigLayoutAndSimulation}}
+    \label{fig:ST_symbol}
+\end{figure}
+%\vspace{1.5\baselineskip}

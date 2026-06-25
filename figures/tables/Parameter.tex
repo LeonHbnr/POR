@@ -1,0 +1,23 @@
+\begin{table}[h!]
+    \centering
+    \footnotesize
+    \begin{tabular}{c|c|c|c|c}
+        \textbf{\makecell{Abkürzung}} &
+        \textbf{\makecell{Bedeutung}} &
+        \textbf{\makecell{Verhalten\\ NMOS}} &
+        \textbf{\makecell{Verhalten\\ PMOS}} &
+        \textbf{\makecell{Verhalten passive\\ Bauelemente}} \\
+        \midrule
+        ttt & typical-typical-typical & Nominal & Nominal & Nominal \\
+        sss & slow-slow-slow & Langsam & Langsam & Langsam \\
+        fff & fast-fast-fast & Schnell & Schnell & Schnell \\
+        sft & slow-fast-typical & Langsam & Schnell & Nominal \\
+        fst & fast-slow-typical & Schnell & Langsam & Nominal \\
+        sfs & slow-fast-slow & Langsam & Schnell & Langsam \\
+        sff & slow-fast-fast & Langsam & Schnell & Schnell \\
+        fss & fast-slow-slow & Schnell & Langsam & Langsam \\
+        fsf & fast-slow-fast & Schnell & Langsam & Schnell \\
+    \end{tabular}
+    \caption{Transistor- und Bauelement-Konfigurationen der Corner-Simulation}
+    \label{tab:transistor_configurations}
+\end{table}

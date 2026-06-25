@@ -1,0 +1,31 @@
+\begin{table}[H]
+    \centering
+    \small
+    \begin{tabular}{c|l|c|c|c}
+        {\rotatebox{90}{\parbox{1.8cm}{\textbf{Spannung}}}} &
+        \textbf{\makecell{Werte}} &
+        \textbf{\makecell{Spezifikation}} &
+        \textbf{\makecell{Min. Wert}} &
+        \textbf{\makecell{Max. Wert}} \\
+        \midrule
+
+        \multirow{5}{*}{\rotatebox{90}{5 V}} &
+        Verzögerung steigende Flanke & 20 us $\leq$ x $\leq$ 130 us & 46.14 us & 89.68 us \\
+        & Verzögerung fallende Flanke & x $\leq$ 1 us & 57.79 ns & 80.07 ns \\
+        & Schwellspannung steigend & 2.2 V $\leq$ x $\leq$ 2.6 V & \cellcolor{lightred}2.093 V & \cellcolor{lightred}2.726 V \\
+        & Schwellspannung fallend & 2.1 V $\leq$ x $\leq$ 2.5 V & \cellcolor{lightred}2.033 V & \cellcolor{lightred}2.655 V \\
+        & Hysterese & 50 mV $\leq$ x $\leq$ 120 mV & 59.2 mV & 71.26 mV \\
+        \midrule
+
+        \multirow{5}{*}{\rotatebox{90}{1.5 V}} &
+        Verzögerung steigende Flanke & 20 us $\leq$ x $\leq$ 230 us & 42.39 us & 77.62 us \\
+        & Verzögerung fallende Flanke & x $\leq$ 1 us & 80.16 ns & 118.7 ns \\
+        & Schwellspannung steigend & 1.1 V $\leq$ x $\leq$ 1.45 V & 1.148 V & 1.1445 V \\
+        & Schwellspannung fallend & 1.05 V $\leq$ x $\leq$ 1.4 V & 1.079 V & 1.36 V \\
+        & Hysterese & 50 mV $\leq$ x $\leq$ 120 mV & 68.96 mV & 84.8 mV \\
+        \midrule
+        
+    \end{tabular}
+    \caption{MC-Process-Simulation mit Anstiegs-und Abfallzeit von 10~ms}
+    \label{tab:MCProcess10}
+\end{table}
